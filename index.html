@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnnLee - Digital Soul Journey</title>
+    
+    <!-- CSS 파일들 -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/tv-frame.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/ui-components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- GSAP CDN -->
+        .noise-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            z-index: 1;
+        }
+<body>
+    <div class="tv-container">
+        <div class="crt-frame">
+            <div class="crt-glow"></div>
+            <div class="screen">
+                <!-- 노이즈 이미지 레이어들 (여기에 background1,3,5,6,8,9,10,11 이미지들이 순환됨) -->
+                <div class="noise-layer" id="noise1"></div>
+                <div class="noise-layer" id="noise2"></div>
+                <div class="noise-layer" id="noise3"></div>
+                <div class="noise-layer" id="noise4"></div>
+                <div class="noise-layer" id="noise5"></div>
+                <div class="noise-layer" id="noise6"></div>
+                <div class="noise-layer" id="noise7"></div>
+                <div class="noise-layer" id="noise8"></div>
+                
+                <!-- CRT 효과들 -->
+                <div class="scanlines"></div>
+                <div class="static-overlay"></div>
+                
+                <!-- 앤리 캐릭터 (노이즈 효과 후 등장) -->
+                <div class="annlee-character" id="annleeCharacter">
+                    <img src="assets/images/annlee/annlee-pixel.png" alt="AnnLee Digital Soul">
+                    <div class="character-glow"></div>
+                </div>
+                
+                <!-- 부팅 시스템 UI -->
+                <div class="boot-interface">
+                    <!-- 로딩 바 -->
+                    <div class="loading-bar">
+                        <div class="loading-progress" id="loadingProgress"></div>
+                    </div>
+                    
+                    <!-- 부팅 텍스트 -->
+                    <div class="boot-text" id="bootText">
+                        ANNLEE SYSTEM v1.0<br>
+                        INITIALIZING DIGITAL SOUL...<br>
+                        <span class="cursor"></span>
+                    </div>
+                    
+                    <!-- 시스템 정보 -->
+                    <div class="system-info" id="systemInfo">
+                        <div class="info-line">Memory: 1024KB</div>
+                        <div class="info-line">Soul Status: Loading...</div>
+                        <div class="info-line">Connection: Y2K Protocol</div>
+                    </div>
+                </div>
+                
+                <!-- 진입 버튼 (부팅 완료 후 나타남) -->
+                <div class="enter-button" id="enterButton">
+                    <button class="crt-button" onclick="enterJourney()">
+                        ENTER THE DIGITAL REALM
+                    </button>
+                    <div class="button-hint">Press SPACE or CLICK to glitch</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 사운드 컨트롤 -->
+        <div class="sound-controls">
+            <button class="sound-toggle" id="soundToggle">🔊</button>
+        </div>
+    </div>
+
+    <!-- JavaScript 파일들 - GSAP 먼저 로드 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/audio-controller.js"></script>
+    <script src="js/tv-boot.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // GSAP 로드 확인 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // GSAP 로드 체크
+            if (typeof gsap === 'undefined') {
+                console.error('❌ GSAP이 로드되지 않았습니다!');
+                alert('인터넷 연결을 확인해주세요. GSAP 라이브러리가 필요합니다.');
+                return;
+            }
+            
+            console.log('✅ GSAP 로드 완료!');
+            
+            // 여행 페이지로 이동 함수
+            window.enterJourney = function() {
+                console.log('enterJourney 함수 실행');
+                gsap.to('.tv-container', {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 1,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        window.location.href = 'journey.html';
+                    }
+                });
+            };
+            
+            // 키보드 단축키
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const enterBtn = document.getElementById('enterButton');
+                    if (enterBtn && !enterBtn.classList.contains('hidden')) {
+                        enterJourney();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+/* Typing Cursor Animation */
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: #333333;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 1.2s infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Smooth Line Appearance */
+.code-line {
+    animation: lineAppear 0.5s ease-out forwards;
+}
+
+@keyframes lineAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Character typing effect */
+.typing-char {
+    opacity: 0;
+    animation: charAppear 0.1s ease-out forwards;
+}
+
+@keyframes charAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Special effects for important lines */
+.code-line.highlight {
+    background-color: rgba(255, 255, 0, 0.1);
+    padding: 2px 4px;
+    border-left: 3px solid #ffcc00;
+    margin-left: -7px;
+    padding-left: 4px;
+}
+
+.code-line.final-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 20px;
+    animation: finalGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes finalGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    to {
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,255,0.3);
+    }
+}
